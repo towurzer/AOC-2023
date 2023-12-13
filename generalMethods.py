@@ -1,3 +1,7 @@
+import atexit
+import time
+
+
 def getInputString(day):
     """returns the input for the day, which needs to be saved in "inputs/dayX" where X is the current day (0=test)"""
     inputFile = open(f"inputs/day{day}")
@@ -59,3 +63,13 @@ def write_list_to_txt(solution_list, day=None, file_path=None):
             if item_index < len(solution_list)-1:
                 file.write("\n")
 
+
+def start_timer(exact=20):
+    """starts a timer that will print the elapsed time when the program exits"""""
+    start_time = time.time()
+
+    def exit_handler():
+        """prints the elapsed time when the program exits"""
+        print(f"Program execution time: {round(time.time() - start_time, exact)} seconds")
+
+    atexit.register(exit_handler)
